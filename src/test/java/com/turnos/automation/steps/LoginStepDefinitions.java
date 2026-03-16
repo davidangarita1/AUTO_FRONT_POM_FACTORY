@@ -16,31 +16,31 @@ public class LoginStepDefinitions {
     private NavbarComponent navbarComponent;
 
     @Given("el usuario se encuentra en la pagina de inicio de sesion")
-    public void elUsuarioSeEncuentraEnLaPaginaDeInicioSesion() {
+    public void userIsOnSignInPage() {
         signInPage.open();
     }
 
     @When("ingresa el email {string} y la contrasena {string}")
-    public void ingresaElEmailYLaContrasena(String email, String contrasena) {
-        signInPage.ingresarEmail(email);
-        signInPage.ingresarContrasena(contrasena);
+    public void userEntersEmailAndPassword(String email, String password) {
+        signInPage.enterEmail(email);
+        signInPage.enterPassword(password);
     }
 
     @And("hace clic en el boton de iniciar sesion")
-    public void hacerClicEnElBotonDeIniciarSesion() {
-        signInPage.hacerClicEnIniciarSesion();
+    public void userClicksSignInButton() {
+        signInPage.clickSignIn();
     }
 
     @Then("el sistema redirige al dashboard")
-    public void elSistemaRedirigAlDashboard() {
-        assertThat(dashboardPage.estaCargada())
+    public void systemRedirectsToDashboard() {
+        assertThat(dashboardPage.isLoaded())
                 .as("La URL debe contener /dashboard")
                 .isTrue();
     }
 
     @And("el navbar muestra la opcion de cerrar sesion")
-    public void elNavbarMuestraLaOpcionDeCerrarSesion() {
-        assertThat(navbarComponent.estaVisibleCerrarSesion())
+    public void navbarShowsSignOutOption() {
+        assertThat(navbarComponent.isSignOutButtonVisible())
                 .as("El enlace 'Cerrar sesión' debe ser visible en el navbar")
                 .isTrue();
     }

@@ -15,7 +15,7 @@ public class Hooks {
     private static final String TEST_USER_NAME = "Usuario Test";
 
     @Before("@crear_usuario")
-    public void crearUsuarioDePrueba() {
+    public void createTestUser() {
         HttpClient client = HttpClient.newHttpClient();
         String body = String.format(
             "{\"email\":\"%s\",\"password\":\"%s\",\"nombre\":\"%s\",\"rol\":\"empleado\"}",

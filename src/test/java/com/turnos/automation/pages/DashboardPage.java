@@ -8,14 +8,14 @@ import org.openqa.selenium.support.FindBy;
 public class DashboardPage extends PageObject {
 
     @FindBy(css = "h1, h2, [data-testid='dashboard-title']")
-    private WebElementFacade tituloDashboard;
+    private WebElementFacade dashboardTitle;
 
-    public boolean estaCargada() {
+    public boolean isLoaded() {
         waitFor(ExpectedConditions.urlContains("/dashboard"));
         return getDriver().getCurrentUrl().contains("/dashboard");
     }
 
-    public String obtenerUrl() {
+    public String getCurrentUrl() {
         return getDriver().getCurrentUrl();
     }
 }

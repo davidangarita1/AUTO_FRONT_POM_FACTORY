@@ -13,35 +13,35 @@ public class SignupStepDefinitions {
     private SignUpPage signUpPage;
 
     @Given("el usuario se encuentra en la pagina de registro")
-    public void elUsuarioSeEncuentraEnLaPaginaDeRegistro() {
+    public void userIsOnSignUpPage() {
         signUpPage.open();
     }
 
     @When("ingresa el nombre {string} el email {string} y la contrasena {string}")
-    public void ingresaElNombreElEmailYLaContrasena(String nombre, String email, String contrasena) {
-        signUpPage.ingresarNombre(nombre);
-        signUpPage.ingresarEmail(email);
-        signUpPage.ingresarContrasena(contrasena);
+    public void userEntersNameEmailAndPassword(String name, String email, String password) {
+        signUpPage.enterName(name);
+        signUpPage.enterEmail(email);
+        signUpPage.enterPassword(password);
     }
 
     @And("hace clic en el boton de registrarse")
-    public void hacerClicEnElBotonDeRegistrarse() {
-        signUpPage.hacerClicEnRegistrarse();
+    public void userClicksSignUpButton() {
+        signUpPage.clickSignUp();
     }
 
     @Then("el sistema muestra un mensaje de error indicando que la contrasena es debil")
-    public void elSistemaMuestraUnMensajeDeErrorIndicandoQuelaContrasenaEsDebil() {
-        assertThat(signUpPage.estaVisibleMensajeError())
+    public void systemShowsWeakPasswordError() {
+        assertThat(signUpPage.isErrorMessageVisible())
                 .as("Debe mostrarse un mensaje de error por contraseña débil")
                 .isTrue();
-        assertThat(signUpPage.obtenerMensajeError())
+        assertThat(signUpPage.getErrorMessage())
                 .as("El mensaje de error debe indicar los requisitos de contraseña")
                 .contains("contraseña");
     }
 
     @And("el usuario permanece en la pagina de registro")
-    public void elUsuarioPermaneneEnLaPaginaDeRegistro() {
-        assertThat(signUpPage.estaEnPaginaDeRegistro())
+    public void userRemainsOnSignUpPage() {
+        assertThat(signUpPage.isOnSignUpPage())
                 .as("La URL debe contener /signup")
                 .isTrue();
     }

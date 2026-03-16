@@ -7,23 +7,23 @@ import org.openqa.selenium.support.FindBy;
 public class NavbarComponent extends PageObject {
 
     @FindBy(xpath = "//button[normalize-space(text())='Cerrar sesión']")
-    private WebElementFacade linkCerrarSesion;
+    private WebElementFacade signOutButton;
 
     @FindBy(linkText = "Iniciar sesión")
-    private WebElementFacade linkIniciarSesion;
+    private WebElementFacade signInLink;
 
     @FindBy(linkText = "Registrarse")
-    private WebElementFacade linkRegistrarse;
+    private WebElementFacade signUpLink;
 
-    public boolean estaVisibleCerrarSesion() {
-        return linkCerrarSesion.isVisible();
+    public boolean isSignOutButtonVisible() {
+        return signOutButton.isVisible();
     }
 
-    public boolean estaVisibleIniciarSesion() {
-        return linkIniciarSesion.isVisible();
+    public boolean isSignInLinkVisible() {
+        return signInLink.isVisible();
     }
 
-    public boolean estaVisibleRegistrarse() {
-        return linkRegistrarse.isVisible();
+    public boolean isSignUpLinkVisible() {
+        return signUpLink.isVisible();
     }
 }

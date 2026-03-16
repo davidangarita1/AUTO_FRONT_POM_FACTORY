@@ -9,48 +9,48 @@ import org.openqa.selenium.support.FindBy;
 public class SignUpPage extends PageObject {
 
     @FindBy(css = "input[type='text'][placeholder='Nombre']")
-    private WebElementFacade campoNombre;
+    private WebElementFacade nameField;
 
     @FindBy(css = "input[type='email'][placeholder='Email']")
-    private WebElementFacade campoEmail;
+    private WebElementFacade emailField;
 
     @FindBy(css = "input[type='password'][placeholder='Contraseña']")
-    private WebElementFacade campoContrasena;
+    private WebElementFacade passwordField;
 
     @FindBy(css = "button[type='submit']")
-    private WebElementFacade botonRegistrarse;
+    private WebElementFacade signUpButton;
 
     @FindBy(css = "[role='alert']")
-    private WebElementFacade mensajeError;
+    private WebElementFacade errorMessage;
 
-    public void ingresarNombre(String nombre) {
-        campoNombre.clear();
-        campoNombre.sendKeys(nombre);
+    public void enterName(String name) {
+        nameField.clear();
+        nameField.sendKeys(name);
     }
 
-    public void ingresarEmail(String email) {
-        campoEmail.clear();
-        campoEmail.sendKeys(email);
+    public void enterEmail(String email) {
+        emailField.clear();
+        emailField.sendKeys(email);
     }
 
-    public void ingresarContrasena(String contrasena) {
-        campoContrasena.clear();
-        campoContrasena.sendKeys(contrasena);
+    public void enterPassword(String password) {
+        passwordField.clear();
+        passwordField.sendKeys(password);
     }
 
-    public void hacerClicEnRegistrarse() {
-        botonRegistrarse.click();
+    public void clickSignUp() {
+        signUpButton.click();
     }
 
-    public String obtenerMensajeError() {
-        return mensajeError.getText();
+    public String getErrorMessage() {
+        return errorMessage.getText();
     }
 
-    public boolean estaVisibleMensajeError() {
-        return mensajeError.isVisible();
+    public boolean isErrorMessageVisible() {
+        return errorMessage.isVisible();
     }
 
-    public boolean estaEnPaginaDeRegistro() {
+    public boolean isOnSignUpPage() {
         return getDriver().getCurrentUrl().contains("/signup");
     }
 }
