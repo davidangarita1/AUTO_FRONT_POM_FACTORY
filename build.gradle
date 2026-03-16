@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.2.8'
+}
+
+group = 'com.turnos.automation'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    serenityVersion = '4.2.63'
+    cucumberVersion = '7.20.1'
+    junitVersion = '5.11.3'
+}
+
+dependencies {
+    testImplementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-ensure:${serenityVersion}"
+
+    testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+    testImplementation "io.cucumber:cucumber-junit-platform-engine:${cucumberVersion}"
+
+    testImplementation "org.assertj:assertj-core:3.26.3"
+    testImplementation "org.junit.platform:junit-platform-suite:1.11.3"
+    testImplementation "org.junit.platform:junit-platform-launcher:1.11.3"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'cucumber.junit-platform.naming-strategy', 'long'
+}
+
+serenity {
+    reports = ['single-page-html']
+}
