@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class NavbarComponent extends PageObject {
 
-    @FindBy(linkText = "Cerrar sesión")
+    @FindBy(xpath = "//button[normalize-space(text())='Cerrar sesión']")
     private WebElementFacade linkCerrarSesion;
 
     @FindBy(linkText = "Iniciar sesión")

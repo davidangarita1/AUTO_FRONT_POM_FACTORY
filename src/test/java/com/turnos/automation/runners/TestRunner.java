@@ -10,7 +10,7 @@ import org.junit.platform.suite.api.Suite;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
 @ConfigurationParameter(key = Constants.PLUGIN_PROPERTY_NAME,
-        value = "pretty, net.serenitybdd.cucumber.SerenityReporterParallel")
+        value = "pretty, io.cucumber.core.plugin.SerenityReporterParallel")
 @ConfigurationParameter(key = Constants.GLUE_PROPERTY_NAME,
         value = "com.turnos.automation.steps")
 public class TestRunner {
