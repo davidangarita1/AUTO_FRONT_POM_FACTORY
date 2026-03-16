@@ -1,27 +1,27 @@
 package com.turnos.automation.pages;
 
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.annotations.DefaultUrl;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @DefaultUrl("/signup")
 public class SignUpPage extends PageObject {
 
     @FindBy(css = "input[type='text'][placeholder='Nombre']")
-    private WebElement campoNombre;
+    private WebElementFacade campoNombre;
 
     @FindBy(css = "input[type='email'][placeholder='Email']")
-    private WebElement campoEmail;
+    private WebElementFacade campoEmail;
 
     @FindBy(css = "input[type='password'][placeholder='Contraseña']")
-    private WebElement campoContrasena;
+    private WebElementFacade campoContrasena;
 
     @FindBy(css = "button[type='submit']")
-    private WebElement botonRegistrarse;
+    private WebElementFacade botonRegistrarse;
 
     @FindBy(css = "[role='alert']")
-    private WebElement mensajeError;
+    private WebElementFacade mensajeError;
 
     public void ingresarNombre(String nombre) {
         campoNombre.clear();
@@ -47,6 +47,6 @@ public class SignUpPage extends PageObject {
     }
 
     public boolean estaVisibleMensajeError() {
-        return mensajeError.isDisplayed();
+        return mensajeError.isVisible();
     }
 }

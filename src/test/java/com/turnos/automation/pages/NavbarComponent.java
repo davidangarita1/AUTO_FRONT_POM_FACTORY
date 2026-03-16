@@ -1,29 +1,29 @@
 package com.turnos.automation.pages;
 
 import net.serenitybdd.core.pages.PageObject;
-import org.openqa.selenium.WebElement;
+import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.support.FindBy;
 
 public class NavbarComponent extends PageObject {
 
     @FindBy(linkText = "Cerrar sesión")
-    private WebElement linkCerrarSesion;
+    private WebElementFacade linkCerrarSesion;
 
     @FindBy(linkText = "Iniciar sesión")
-    private WebElement linkIniciarSesion;
+    private WebElementFacade linkIniciarSesion;
 
     @FindBy(linkText = "Registrarse")
-    private WebElement linkRegistrarse;
+    private WebElementFacade linkRegistrarse;
 
     public boolean estaVisibleCerrarSesion() {
-        return linkCerrarSesion.isDisplayed();
+        return linkCerrarSesion.isVisible();
     }
 
     public boolean estaVisibleIniciarSesion() {
-        return linkIniciarSesion.isDisplayed();
+        return linkIniciarSesion.isVisible();
     }
 
     public boolean estaVisibleRegistrarse() {
-        return linkRegistrarse.isDisplayed();
+        return linkRegistrarse.isVisible();
     }
 }

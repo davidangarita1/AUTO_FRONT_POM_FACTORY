@@ -1,24 +1,24 @@
 package com.turnos.automation.pages;
 
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.annotations.DefaultUrl;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @DefaultUrl("/signin")
 public class SignInPage extends PageObject {
 
     @FindBy(css = "input[type='email'][placeholder='Email']")
-    private WebElement campoEmail;
+    private WebElementFacade campoEmail;
 
     @FindBy(css = "input[type='password'][placeholder='Contraseña']")
-    private WebElement campoContrasena;
+    private WebElementFacade campoContrasena;
 
     @FindBy(css = "button[type='submit']")
-    private WebElement botonIniciarSesion;
+    private WebElementFacade botonIniciarSesion;
 
     @FindBy(css = "[role='alert']")
-    private WebElement mensajeError;
+    private WebElementFacade mensajeError;
 
     public void ingresarEmail(String email) {
         campoEmail.clear();
@@ -39,6 +39,6 @@ public class SignInPage extends PageObject {
     }
 
     public boolean estaVisibleMensajeError() {
-        return mensajeError.isDisplayed();
+        return mensajeError.isVisible();
     }
 }

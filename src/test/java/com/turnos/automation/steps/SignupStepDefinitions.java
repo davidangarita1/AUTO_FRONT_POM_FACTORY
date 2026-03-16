@@ -45,7 +45,7 @@ public class SignupStepDefinitions {
     }
 
     @And("el usuario permanece en la pagina de registro")
-    public void elUsuarioPermanaceEnLaPaginaDeRegistro() {
+    public void elUsuarioPermaneneEnLaPaginaDeRegistro() {
         assertThat(driver.getCurrentUrl())
                 .as("La URL debe contener /signup")
                 .contains("/signup");
