@@ -5,15 +5,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.annotations.Managed;
-import org.openqa.selenium.WebDriver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignupStepDefinitions {
-
-    @Managed
-    private WebDriver driver;
 
     private SignUpPage signUpPage;
 
@@ -46,8 +41,8 @@ public class SignupStepDefinitions {
 
     @And("el usuario permanece en la pagina de registro")
     public void elUsuarioPermaneneEnLaPaginaDeRegistro() {
-        assertThat(driver.getCurrentUrl())
+        assertThat(signUpPage.estaEnPaginaDeRegistro())
                 .as("La URL debe contener /signup")
-                .contains("/signup");
+                .isTrue();
     }
 }

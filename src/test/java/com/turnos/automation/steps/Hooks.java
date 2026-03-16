@@ -30,8 +30,7 @@ public class Hooks {
 
         try {
             client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (Exception e) {
-            // El usuario puede ya existir o la API no estar disponible; el test continua
+        } catch (Exception ignored) {
         }
     }
 }

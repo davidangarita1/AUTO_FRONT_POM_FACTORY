@@ -49,4 +49,8 @@ public class SignUpPage extends PageObject {
     public boolean estaVisibleMensajeError() {
         return mensajeError.isVisible();
     }
+
+    public boolean estaEnPaginaDeRegistro() {
+        return getDriver().getCurrentUrl().contains("/signup");
+    }
 }

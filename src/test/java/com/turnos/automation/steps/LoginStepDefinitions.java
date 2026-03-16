@@ -7,15 +7,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.annotations.Managed;
-import org.openqa.selenium.WebDriver;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginStepDefinitions {
-
-    @Managed
-    private WebDriver driver;
 
     private SignInPage signInPage;
     private DashboardPage dashboardPage;
