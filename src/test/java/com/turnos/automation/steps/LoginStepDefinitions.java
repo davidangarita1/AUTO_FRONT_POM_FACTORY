@@ -44,4 +44,11 @@ public class LoginStepDefinitions {
                 .as("El enlace 'Cerrar sesión' debe ser visible en el navbar")
                 .isTrue();
     }
+
+    @Then("el sistema muestra un mensaje de error de credenciales invalidas")
+    public void systemShowsInvalidCredentialsError() {
+        assertThat(signInPage.isErrorMessageVisible())
+                .as("Debe mostrarse un mensaje de error por credenciales inválidas")
+                .isTrue();
+    }
 }
