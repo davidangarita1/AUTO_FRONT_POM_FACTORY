@@ -21,21 +21,15 @@ public class LoginStepDefinitions {
         signInPage.open();
     }
 
+    @And("hace clic en el boton de iniciar sesion")
+    public void userClicksSignInButton() {
+        signInPage.clickSignIn();
+    }
+
     @When("ingresa las credenciales validas")
     public void userEntersValidCredentials() {
         signInPage.enterEmail(TestConstants.TEST_USER_EMAIL);
         signInPage.enterPassword(TestConstants.TEST_USER_PASSWORD);
-    }
-
-    @When("ingresa una contrasena incorrecta")
-    public void userEntersInvalidPassword() {
-        signInPage.enterEmail(TestConstants.TEST_USER_EMAIL);
-        signInPage.enterPassword(TestConstants.INVALID_PASSWORD);
-    }
-
-    @And("hace clic en el boton de iniciar sesion")
-    public void userClicksSignInButton() {
-        signInPage.clickSignIn();
     }
 
     @Then("el sistema redirige al dashboard")
@@ -50,6 +44,12 @@ public class LoginStepDefinitions {
         assertThat(navbarComponent.isSignOutButtonVisible())
                 .as("El enlace 'Cerrar sesión' debe ser visible en el navbar")
                 .isTrue();
+    }
+
+    @When("ingresa una contrasena incorrecta")
+    public void userEntersInvalidPassword() {
+        signInPage.enterEmail(TestConstants.TEST_USER_EMAIL);
+        signInPage.enterPassword(TestConstants.INVALID_PASSWORD);
     }
 
     @Then("el sistema muestra un mensaje de error de {string}")
