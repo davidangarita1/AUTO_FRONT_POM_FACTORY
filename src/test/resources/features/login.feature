@@ -8,6 +8,7 @@ Feature: Inicio de sesion
     Then el sistema redirige al dashboard
     And el navbar muestra la opcion de cerrar sesion
 
+  @crear_usuario
   Scenario: El sistema rechaza el inicio de sesion con credenciales invalidas
     Given el usuario se encuentra en la pagina de inicio de sesion
     When ingresa el email "usuario_test@correo.com" y la contrasena "WrongPass99!"
