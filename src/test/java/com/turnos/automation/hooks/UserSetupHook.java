@@ -34,7 +34,7 @@ public class UserSetupHook {
 
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(apiBaseUrl + Constants.ENDPOINT_SIGN_UP))
-            .header("Content-Type", "application/json")
+            .header("Content-Type", Constants.CONTENT_TYPE_JSON)
             .POST(HttpRequest.BodyPublishers.ofString(body))
             .build();
 
