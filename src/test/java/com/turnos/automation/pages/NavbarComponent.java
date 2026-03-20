@@ -9,21 +9,7 @@ public class NavbarComponent extends PageObject {
     @FindBy(xpath = "//button[normalize-space(text())='Cerrar sesión']")
     private WebElementFacade signOutButton;
 
-    @FindBy(linkText = "Iniciar sesión")
-    private WebElementFacade signInLink;
-
-    @FindBy(linkText = "Registrarse")
-    private WebElementFacade signUpLink;
-
     public boolean isSignOutButtonVisible() {
         return signOutButton.isVisible();
-    }
-
-    public boolean isSignInLinkVisible() {
-        return signInLink.isVisible();
-    }
-
-    public boolean isSignUpLinkVisible() {
-        return signUpLink.isVisible();
     }
 }
