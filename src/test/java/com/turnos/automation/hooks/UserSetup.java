@@ -15,7 +15,9 @@ public class UserSetup {
 
     @Before("@crear_usuario")
     public void createTestUser() throws Exception {
-        HttpClient client = HttpClient.newHttpClient();
+        HttpClient client = HttpClient.newBuilder()
+            .version(HttpClient.Version.HTTP_1_1)
+            .build();
         String body = String.format(
             "{\"email\":\"%s\",\"password\":\"%s\",\"nombre\":\"%s\",\"rol\":\"%s\"}",
             TestConstants.TEST_USER_EMAIL,
