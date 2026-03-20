@@ -10,7 +10,6 @@ public final class Constants {
 
     public static final String TEST_USER_EMAIL = "usuario_test@correo.com";
     public static final String TEST_USER_PASSWORD = "Test1234!";
-    public static final String INVALID_PASSWORD = "WrongPass99!";
     public static final String TEST_USER_NAME = "Usuario Test";
     public static final String TEST_USER_ROLE = "empleado";
 }

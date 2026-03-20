@@ -3,7 +3,6 @@ package com.turnos.automation.stepdefinitions;
 import com.turnos.automation.pages.DashboardPage;
 import com.turnos.automation.pages.NavbarComponent;
 import com.turnos.automation.pages.SignInPage;
-import com.turnos.automation.util.Constants;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -26,10 +25,10 @@ public class LoginStepDefinitions {
         signInPage.clickSignIn();
     }
 
-    @When("ingresa las credenciales validas")
-    public void userEntersValidCredentials() {
-        signInPage.enterEmail(Constants.TEST_USER_EMAIL);
-        signInPage.enterPassword(Constants.TEST_USER_PASSWORD);
+    @When("ingresa el correo {string} y la contrasena {string}")
+    public void userEntersCredentials(String email, String password) {
+        signInPage.enterEmail(email);
+        signInPage.enterPassword(password);
     }
 
     @Then("el sistema redirige al dashboard")
@@ -44,12 +43,6 @@ public class LoginStepDefinitions {
         assertThat(navbarComponent.isSignOutButtonVisible())
                 .as("El enlace 'Cerrar sesión' debe ser visible en el navbar")
                 .isTrue();
-    }
-
-    @When("ingresa una contrasena incorrecta")
-    public void userEntersInvalidPassword() {
-        signInPage.enterEmail(Constants.TEST_USER_EMAIL);
-        signInPage.enterPassword(Constants.INVALID_PASSWORD);
     }
 
     @Then("el sistema muestra un mensaje de error de {string}")
