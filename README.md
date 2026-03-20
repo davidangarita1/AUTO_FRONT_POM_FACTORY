@@ -4,7 +4,7 @@ Proyecto de automatización de pruebas UI para el Sistema de Turnos, construido 
 
 ## Prerrequisitos
 
-1. **Java 17** o superior instalado y configurado en el PATH
+1. **Java 21** o superior instalado y configurado en el PATH
 2. **Google Chrome** instalado (el driver se descarga automáticamente vía Serenity)
 3. **La aplicación bajo prueba** corriendo en `http://localhost:3001` (frontend Next.js)
 4. **La API backend** corriendo en `http://localhost:3000` (necesaria para la creación del usuario de prueba)
