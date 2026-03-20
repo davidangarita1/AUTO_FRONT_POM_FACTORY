@@ -10,8 +10,11 @@ import java.net.http.HttpResponse;
 
 public class UserSetup {
 
+    private static final int STATUS_CREATED = 201;
+    private static final int STATUS_CONFLICT = 409;
+
     @Before("@crear_usuario")
-    public void createTestUser() {
+    public void createTestUser() throws Exception {
         HttpClient client = HttpClient.newHttpClient();
         String body = String.format(
             "{\"email\":\"%s\",\"password\":\"%s\",\"nombre\":\"%s\",\"rol\":\"%s\"}",
@@ -27,9 +30,13 @@ public class UserSetup {
             .POST(HttpRequest.BodyPublishers.ofString(body))
             .build();
 
-        try {
-            client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (Exception ignored) {
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        int status = response.statusCode();
+
+        if (status != STATUS_CREATED && status != STATUS_CONFLICT) {
+            throw new IllegalStateException(
+                "Failed to set up test user. HTTP " + status + ": " + response.body()
+            );
         }
     }
 }
