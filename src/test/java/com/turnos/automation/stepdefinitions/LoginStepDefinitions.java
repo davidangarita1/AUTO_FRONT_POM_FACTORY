@@ -3,6 +3,7 @@ package com.turnos.automation.stepdefinitions;
 import com.turnos.automation.pages.DashboardPage;
 import com.turnos.automation.pages.NavbarComponent;
 import com.turnos.automation.pages.SignInPage;
+import com.turnos.automation.util.TestConstants;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -20,10 +21,16 @@ public class LoginStepDefinitions {
         signInPage.open();
     }
 
-    @When("ingresa el email {string} y la contrasena {string}")
-    public void userEntersEmailAndPassword(String email, String password) {
-        signInPage.enterEmail(email);
-        signInPage.enterPassword(password);
+    @When("ingresa las credenciales validas")
+    public void userEntersValidCredentials() {
+        signInPage.enterEmail(TestConstants.TEST_USER_EMAIL);
+        signInPage.enterPassword(TestConstants.TEST_USER_PASSWORD);
+    }
+
+    @When("ingresa una contrasena incorrecta")
+    public void userEntersInvalidPassword() {
+        signInPage.enterEmail(TestConstants.TEST_USER_EMAIL);
+        signInPage.enterPassword(TestConstants.INVALID_PASSWORD);
     }
 
     @And("hace clic en el boton de iniciar sesion")
