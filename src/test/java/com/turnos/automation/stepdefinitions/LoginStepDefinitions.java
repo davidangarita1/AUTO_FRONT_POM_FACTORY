@@ -20,7 +20,7 @@ public class LoginStepDefinitions {
         signInPage.open();
     }
 
-    @When("^ingresa el \"<email>\" de \"([^\"]*)\" y (?:el|la) \"<password>\" con \"([^\"]*)\"$")
+    @When("ingresa el email {string} y la contrasena {string}")
     public void userEntersEmailAndPassword(String email, String password) {
         signInPage.enterEmail(email);
         signInPage.enterPassword(password);
