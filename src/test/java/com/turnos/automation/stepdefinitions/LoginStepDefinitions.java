@@ -1,4 +1,4 @@
-package com.turnos.automation.steps;
+package com.turnos.automation.stepdefinitions;
 
 import com.turnos.automation.pages.DashboardPage;
 import com.turnos.automation.pages.NavbarComponent;
@@ -20,7 +20,7 @@ public class LoginStepDefinitions {
         signInPage.open();
     }
 
-    @When("ingresa el email {string} y la contrasena {string}")
+    @When("^ingresa el \"<email>\" de \"([^\"]*)\" y (?:el|la) \"<password>\" con \"([^\"]*)\"$")
     public void userEntersEmailAndPassword(String email, String password) {
         signInPage.enterEmail(email);
         signInPage.enterPassword(password);
@@ -45,10 +45,10 @@ public class LoginStepDefinitions {
                 .isTrue();
     }
 
-    @Then("el sistema muestra un mensaje de error de credenciales invalidas")
-    public void systemShowsInvalidCredentialsError() {
-        assertThat(signInPage.isErrorMessageVisible())
-                .as("Debe mostrarse un mensaje de error por credenciales inválidas")
-                .isTrue();
+    @Then("el sistema muestra un mensaje de error de {string}")
+    public void systemShowsErrorMessage(String expectedMessage) {
+        assertThat(signInPage.getErrorMessage())
+                .as("El mensaje de error debe contener: " + expectedMessage)
+                .contains(expectedMessage);
     }
 }

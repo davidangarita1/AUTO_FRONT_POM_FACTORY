@@ -12,6 +12,6 @@ import org.junit.platform.suite.api.Suite;
 @ConfigurationParameter(key = Constants.PLUGIN_PROPERTY_NAME,
         value = "pretty, net.serenitybdd.cucumber.core.plugin.SerenityReporterParallel")
 @ConfigurationParameter(key = Constants.GLUE_PROPERTY_NAME,
-        value = "com.turnos.automation.steps")
+        value = "com.turnos.automation")
 public class TestRunner {
 }
