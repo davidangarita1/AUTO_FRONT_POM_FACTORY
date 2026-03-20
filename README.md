@@ -44,8 +44,8 @@ AUTO_FRONT_POM_FACTORY/
 
 | # | Feature | Escenario | Tipo |
 |---|---------|-----------|------|
-| 1 | Inicio de sesion | El usuario inicia sesion con credenciales validas | Positivo |
-| 2 | Inicio de sesion | El sistema rechaza el inicio de sesion con credenciales invalidas | Negativo |
+| 1 | Inicio de sesion | El usuario inicia sesion con credenciales validas | Positivo (Scenario Outline) |
+| 2 | Inicio de sesion | El sistema rechaza el inicio de sesion con credenciales invalidas | Negativo (Scenario Outline) |
 
 ## Ejecución de las pruebas
 
