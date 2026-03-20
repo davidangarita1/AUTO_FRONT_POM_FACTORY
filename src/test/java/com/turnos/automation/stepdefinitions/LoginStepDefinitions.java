@@ -3,7 +3,7 @@ package com.turnos.automation.stepdefinitions;
 import com.turnos.automation.pages.DashboardPage;
 import com.turnos.automation.pages.NavbarComponent;
 import com.turnos.automation.pages.SignInPage;
-import com.turnos.automation.util.TestConstants;
+import com.turnos.automation.util.Constants;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -28,8 +28,8 @@ public class LoginStepDefinitions {
 
     @When("ingresa las credenciales validas")
     public void userEntersValidCredentials() {
-        signInPage.enterEmail(TestConstants.TEST_USER_EMAIL);
-        signInPage.enterPassword(TestConstants.TEST_USER_PASSWORD);
+        signInPage.enterEmail(Constants.TEST_USER_EMAIL);
+        signInPage.enterPassword(Constants.TEST_USER_PASSWORD);
     }
 
     @Then("el sistema redirige al dashboard")
@@ -48,8 +48,8 @@ public class LoginStepDefinitions {
 
     @When("ingresa una contrasena incorrecta")
     public void userEntersInvalidPassword() {
-        signInPage.enterEmail(TestConstants.TEST_USER_EMAIL);
-        signInPage.enterPassword(TestConstants.INVALID_PASSWORD);
+        signInPage.enterEmail(Constants.TEST_USER_EMAIL);
+        signInPage.enterPassword(Constants.INVALID_PASSWORD);
     }
 
     @Then("el sistema muestra un mensaje de error de {string}")

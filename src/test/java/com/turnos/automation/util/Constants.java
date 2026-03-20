@@ -1,8 +1,8 @@
 package com.turnos.automation.util;
 
-public final class TestConstants {
+public final class Constants {
 
-    private TestConstants() {}
+    private Constants() {}
 
     public static final String API_BASE_URL = "http://localhost:3000";
     public static final String ENDPOINT_SIGN_UP = "/auth/signUp";
