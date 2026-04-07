@@ -8,8 +8,7 @@ import java.time.Duration;
 
 public class ToastComponent extends PageObject {
 
-    private static final By TOAST_LOCATOR = By.xpath(
-            "//*[contains(@class,'toast') or contains(@class,'Toast')]");
+    private static final By TOAST_LOCATOR = By.cssSelector("div[role='alert']");
 
     public void waitForToast() {
         withTimeoutOf(Duration.ofSeconds(10)).waitFor(

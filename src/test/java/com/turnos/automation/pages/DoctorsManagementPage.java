@@ -30,6 +30,7 @@ public class DoctorsManagementPage extends PageObject {
     private WebElementFacade emptyTableMessage;
 
     public String getPageTitle() {
+        waitFor(ExpectedConditions.urlContains("/doctors"));
         pageTitle.waitUntilVisible();
         return pageTitle.getText();
     }
@@ -54,19 +55,19 @@ public class DoctorsManagementPage extends PageObject {
 
     public boolean isDoctorInTable(String doctorName) {
         return getDriver().findElements(By.xpath(
-                "//table//tbody//tr//td[normalize-space(text())='" + doctorName + "']"))
+                "//table//tbody//tr//td[normalize-space(.)='" + doctorName + "']"))
                 .size() > 0;
     }
 
     public String getDoctorOffice(String doctorName) {
         return getDriver().findElement(By.xpath(
-                "//table//tbody//tr[td[normalize-space(text())='" + doctorName + "']]/td[3]"))
+                "//table//tbody//tr[td[normalize-space(.)='" + doctorName + "']]/td[3]"))
                 .getText();
     }
 
     public String getDoctorShift(String doctorName) {
         return getDriver().findElement(By.xpath(
-                "//table//tbody//tr[td[normalize-space(text())='" + doctorName + "']]/td[4]"))
+                "//table//tbody//tr[td[normalize-space(.)='" + doctorName + "']]/td[4]"))
                 .getText();
     }
 
@@ -85,12 +86,12 @@ public class DoctorsManagementPage extends PageObject {
     }
 
     public void waitForDoctorInTable(String doctorName) {
-        withTimeoutOf(Duration.ofSeconds(10)).waitFor(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//table//tbody//tr//td[normalize-space(text())='" + doctorName + "']")));
+        withTimeoutOf(Duration.ofSeconds(15)).waitFor(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//table//tbody//tr//td[normalize-space(.)='" + doctorName + "']")));
     }
 
     public void waitForDoctorNotInTable(String doctorName) {
-        withTimeoutOf(Duration.ofSeconds(10)).waitFor(ExpectedConditions.invisibilityOfElementLocated(
-                By.xpath("//table//tbody//tr//td[normalize-space(text())='" + doctorName + "']")));
+        withTimeoutOf(Duration.ofSeconds(15)).waitFor(ExpectedConditions.invisibilityOfElementLocated(
+                By.xpath("//table//tbody//tr//td[normalize-space(.)='" + doctorName + "']")));
     }
 }

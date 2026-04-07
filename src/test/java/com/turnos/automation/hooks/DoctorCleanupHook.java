@@ -2,6 +2,7 @@ package com.turnos.automation.hooks;
 
 import com.turnos.automation.util.Constants;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.model.environment.SystemEnvironmentVariables;
 
@@ -12,8 +13,17 @@ import java.net.http.HttpResponse;
 
 public class DoctorCleanupHook {
 
+    @Before("@limpiar_medicos")
+    public void setupCleanDoctors() throws Exception {
+        cleanupDoctorsViaApi();
+    }
+
     @After("@limpiar_medicos")
     public void cleanupDoctors() throws Exception {
+        cleanupDoctorsViaApi();
+    }
+
+    private void cleanupDoctorsViaApi() throws Exception {
         String apiBaseUrl = EnvironmentSpecificConfiguration
                 .from(SystemEnvironmentVariables.currentEnvironmentVariables())
                 .getProperty("api.base.url");

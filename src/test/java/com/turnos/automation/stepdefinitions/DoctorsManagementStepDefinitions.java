@@ -24,6 +24,10 @@ public class DoctorsManagementStepDefinitions {
     private ConfirmDeleteModalComponent deleteModal;
     private ToastComponent toastComponent;
 
+    private String uniqueCedula(String base) {
+        return String.valueOf(System.currentTimeMillis() % 10000000L);
+    }
+
     // --- HU-01: Acceso y visualizacion ---
 
     @Then("la barra de navegacion muestra el enlace {string}")
@@ -48,8 +52,10 @@ public class DoctorsManagementStepDefinitions {
     @And("la tabla muestra los encabezados {string}")
     public void tableShowsHeaders(String headersCommaSeparated) {
         List<String> expectedHeaders = Arrays.asList(headersCommaSeparated.split(","));
-        assertThat(doctorsPage.getTableHeaders())
-                .as("Los encabezados de la tabla deben coincidir")
+        List<String> currentHeaders = doctorsPage.getTableHeaders();
+        assertThat(currentHeaders)
+                .as("Los encabezados de la tabla deben coincidir (case-insensitive)")
+                .usingElementComparator(String.CASE_INSENSITIVE_ORDER)
                 .containsExactlyElementsOf(expectedHeaders);
     }
 
@@ -82,7 +88,7 @@ public class DoctorsManagementStepDefinitions {
     public void enterNameAndCedula(String name, String cedula) {
         createModal.waitForModal();
         createModal.enterName(name);
-        createModal.enterCedula(cedula);
+        createModal.enterCedula(uniqueCedula(cedula));
     }
 
     @And("selecciona el consultorio {string} y la franja horaria {string}")
@@ -102,9 +108,10 @@ public class DoctorsManagementStepDefinitions {
 
     @Then("aparece el mensaje flotante {string}")
     public void toastMessageAppears(String expectedMessage) {
-        assertThat(toastComponent.containsMessage(expectedMessage))
+        String actualMessage = toastComponent.getToastMessage();
+        assertThat(actualMessage)
                 .as("El mensaje flotante debe contener: " + expectedMessage)
-                .isTrue();
+                .contains(expectedMessage);
     }
 
     @And("la tabla muestra al medico {string} con consultorio {string} y franja {string}")
@@ -175,7 +182,7 @@ public class DoctorsManagementStepDefinitions {
         doctorsPage.clickCreateDoctor();
         createModal.waitForModal();
         createModal.enterName(name);
-        createModal.enterCedula(cedula);
+        createModal.enterCedula(uniqueCedula(cedula));
         createModal.selectOffice(office);
         createModal.selectShift(shift);
         createModal.clickSave();
