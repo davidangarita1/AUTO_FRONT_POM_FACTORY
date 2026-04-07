@@ -28,8 +28,6 @@ public class DoctorsManagementStepDefinitions {
         return String.valueOf(System.currentTimeMillis() % 10000000L);
     }
 
-    // --- HU-01: Acceso y visualizacion ---
-
     @Then("la barra de navegacion muestra el enlace {string}")
     public void navbarShowsLink(String linkText) {
         assertThat(navbarComponent.isLinkVisible(linkText))
@@ -65,8 +63,6 @@ public class DoctorsManagementStepDefinitions {
                 .as("El boton '" + buttonText + "' debe ser visible")
                 .isTrue();
     }
-
-    // --- HU-02: Crear medico ---
 
     @And("hace clic en el boton {string}")
     public void clickButton(String buttonText) {
@@ -128,8 +124,6 @@ public class DoctorsManagementStepDefinitions {
                 .isEqualTo(shift);
     }
 
-    // --- Validaciones de creacion ---
-
     @When("el usuario toca el campo nombre y sale sin escribir")
     public void touchNameFieldAndLeave() {
         createModal.waitForModal();
@@ -174,8 +168,6 @@ public class DoctorsManagementStepDefinitions {
     public void selectOfficeWithoutShift(String office) {
         createModal.selectOffice(office);
     }
-
-    // --- HU-03: Editar medico ---
 
     @And("crea un medico {string} con cedula {string} consultorio {string} y franja {string}")
     public void createDoctorWithDetails(String name, String cedula, String office, String shift) {
@@ -228,8 +220,6 @@ public class DoctorsManagementStepDefinitions {
                 .as("El modal de edicion debe permanecer abierto")
                 .isTrue();
     }
-
-    // --- HU-04: Dar de baja ---
 
     @And("hace clic en el icono de dar de baja del medico {string}")
     public void clickDeleteDoctorIcon(String doctorDisplayName) {
