@@ -6,8 +6,6 @@ Feature: Gestion de Medicos
     And hace clic en el boton de iniciar sesion
     Then el sistema redirige al dashboard
 
-  # --- HU-01: Acceso y visualizacion del modulo ---
-
   @crear_usuario
   Scenario: La barra de navegacion muestra el enlace Gestion Medicos para usuario autenticado
     Then la barra de navegacion muestra el enlace "Gestión Médicos"
@@ -18,8 +16,6 @@ Feature: Gestion de Medicos
     Then la pantalla muestra el titulo "Gestión de Médicos"
     And la tabla muestra los encabezados "Nombre completo,Cédula,Consultorio,Franja Horaria,Acciones"
     And el boton "Crear médico" es visible
-
-  # --- HU-02: Crear un nuevo medico ---
 
   @crear_usuario @limpiar_medicos
   Scenario Outline: Crear un medico con consultorio y franja horaria
@@ -81,8 +77,6 @@ Feature: Gestion de Medicos
     Then aparece el mensaje de validacion "La franja horaria es obligatoria cuando se asigna un consultorio"
     And el boton "Guardar" del modal esta deshabilitado
 
-  # --- HU-03: Editar un medico creado ---
-
   @crear_usuario @limpiar_medicos
   Scenario: Editar consultorio y franja de un medico
     When el usuario hace clic en el enlace "Gestión Médicos"
@@ -101,8 +95,6 @@ Feature: Gestion de Medicos
     And hace clic en el icono de editar del medico "Dr. Laura Gomez"
     When el usuario hace clic fuera del modal de edicion
     Then el modal de edicion permanece abierto
-
-  # --- HU-04: Dar de baja a un medico ---
 
   @crear_usuario @limpiar_medicos
   Scenario: Confirmar la baja logica de un medico
