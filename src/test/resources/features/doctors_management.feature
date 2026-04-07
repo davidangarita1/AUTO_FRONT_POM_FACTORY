@@ -29,8 +29,9 @@ Feature: Gestion de Medicos
     And la tabla muestra al medico "Dr. <nombre>" con consultorio "<consultorio>" y franja "<franja>"
 
     Examples:
-      | nombre        | cedula  | consultorio | franja       |
-      | Carlos Prueba | 7654321 | 1           | 06:00-14:00  |
+      | nombre        | cedula  | consultorio | franja      |
+      | Carlos Prueba | 7654321 | 1           | 06:00-14:00 |
+      | Luis Vargas   | 2345678 | 2           | 14:00-22:00 |
 
   @crear_usuario @limpiar_medicos
   Scenario Outline: Crear un medico sin consultorio ni franja horaria
@@ -62,11 +63,16 @@ Feature: Gestion de Medicos
     And el boton "Guardar" del modal esta deshabilitado
 
   @crear_usuario
-  Scenario: La cedula rechaza letras y solo acepta numeros
+  Scenario Outline: La cedula filtra caracteres no numericos
     When el usuario hace clic en el enlace "Gestión Médicos"
     And hace clic en el boton "Crear médico"
-    When el usuario escribe "ABC123" en el campo cedula
-    Then el campo cedula muestra solo "123"
+    When el usuario escribe "<entrada>" en el campo cedula
+    Then el campo cedula muestra solo "<resultado>"
+
+    Examples:
+      | entrada | resultado |
+      | ABC123  | 123       |
+      | 456XYZ  | 456       |
 
   @crear_usuario
   Scenario: Consultorio seleccionado sin franja horaria impide guardar
@@ -78,15 +84,20 @@ Feature: Gestion de Medicos
     And el boton "Guardar" del modal esta deshabilitado
 
   @crear_usuario @limpiar_medicos
-  Scenario: Editar consultorio y franja de un medico
+  Scenario Outline: Editar consultorio y franja de un medico
     When el usuario hace clic en el enlace "Gestión Médicos"
-    And crea un medico "Pedro Lopez" con cedula "9876543" consultorio "3" y franja "06:00-14:00"
-    And hace clic en el icono de editar del medico "Dr. Pedro Lopez"
+    And crea un medico "<nombre>" con cedula "<cedula>" consultorio "<consultorio_inicial>" y franja "<franja_inicial>"
+    And hace clic en el icono de editar del medico "Dr. <nombre>"
     Then se abre el modal de edicion con los datos del medico
-    When cambia el consultorio a "4" y la franja horaria a "14:00-22:00"
+    When cambia el consultorio a "<consultorio_nuevo>" y la franja horaria a "<franja_nueva>"
     And hace clic en el boton "Guardar" del modal de edicion
     Then aparece el mensaje flotante "Médico guardado exitosamente"
-    And la tabla muestra al medico "Dr. Pedro Lopez" con consultorio "4" y franja "14:00-22:00"
+    And la tabla muestra al medico "Dr. <nombre>" con consultorio "<consultorio_nuevo>" y franja "<franja_nueva>"
+
+    Examples:
+      | nombre      | cedula  | consultorio_inicial | franja_inicial | consultorio_nuevo | franja_nueva |
+      | Pedro Lopez | 9876543 | 3                   | 06:00-14:00    | 4                 | 14:00-22:00  |
+      | Ana Castro  | 1234560 | 1                   | 14:00-22:00    | 2                 | 06:00-14:00  |
 
   @crear_usuario @limpiar_medicos
   Scenario: Clic fuera del modal de edicion no lo cierra
