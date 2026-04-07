@@ -88,12 +88,19 @@ public class DoctorCleanupHook {
             int end = json.indexOf("\"", start);
             String doctorId = json.substring(start, end);
 
+            HttpRequest clearRequest = HttpRequest.newBuilder()
+                    .uri(URI.create(apiBaseUrl + Constants.ENDPOINT_DOCTORS + "/" + doctorId))
+                    .header("Authorization", "Bearer " + token)
+                    .header("Content-Type", Constants.CONTENT_TYPE_JSON)
+                    .PUT(HttpRequest.BodyPublishers.ofString("{\"office\":null,\"shift\":null}"))
+                    .build();
+            client.send(clearRequest, HttpResponse.BodyHandlers.ofString());
+
             HttpRequest deleteRequest = HttpRequest.newBuilder()
                     .uri(URI.create(apiBaseUrl + Constants.ENDPOINT_DOCTORS + "/" + doctorId))
                     .header("Authorization", "Bearer " + token)
                     .DELETE()
                     .build();
-
             client.send(deleteRequest, HttpResponse.BodyHandlers.ofString());
 
             searchFrom = end;
