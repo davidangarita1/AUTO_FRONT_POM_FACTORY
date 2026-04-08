@@ -161,7 +161,7 @@ Feature: Gestion de Medicos
     And hace clic en el boton "Crear médico"
     When ingresa el nombre "Medico Nuevo" y la cedula reutilizada del medico dado de baja
     And hace clic en el boton "Guardar" del modal
-    Then aparece el mensaje flotante "HTTP_ERROR_500"
+    Then aparece el mensaje flotante "Error del servidor. Intente más tarde."
 
   @crear_usuario @limpiar_medicos
   Scenario: Cerrar el modal de edicion sin guardar preserva los datos
