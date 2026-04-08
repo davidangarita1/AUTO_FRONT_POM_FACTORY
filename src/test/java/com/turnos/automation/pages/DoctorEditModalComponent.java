@@ -2,9 +2,14 @@ package com.turnos.automation.pages;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class DoctorEditModalComponent extends PageObject {
 
@@ -62,6 +67,12 @@ public class DoctorEditModalComponent extends PageObject {
 
     public void selectShift(String shift) {
         shiftSelect.waitUntilEnabled();
+        new WebDriverWait(getDriver(), Duration.ofSeconds(10)).until(
+                ExpectedConditions.presenceOfNestedElementLocatedBy(
+                        shiftSelect.getWrappedElement(),
+                        By.cssSelector("option[value='" + shift + "']")
+                )
+        );
         shiftSelect.selectByValue(shift);
     }
 
@@ -78,6 +89,6 @@ public class DoctorEditModalComponent extends PageObject {
     }
 
     public void pressEscape() {
-        modalBackdrop.sendKeys(Keys.ESCAPE);
+        new Actions(getDriver()).sendKeys(Keys.ESCAPE).perform();
     }
 }

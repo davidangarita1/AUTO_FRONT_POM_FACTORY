@@ -5,6 +5,9 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class DoctorFormModalComponent extends PageObject {
 
@@ -73,6 +76,12 @@ public class DoctorFormModalComponent extends PageObject {
 
     public void selectShift(String shift) {
         shiftSelect.waitUntilEnabled();
+        new WebDriverWait(getDriver(), Duration.ofSeconds(10)).until(
+                ExpectedConditions.presenceOfNestedElementLocatedBy(
+                        shiftSelect.getWrappedElement(),
+                        By.cssSelector("option[value='" + shift + "']")
+                )
+        );
         shiftSelect.selectByValue(shift);
     }
 

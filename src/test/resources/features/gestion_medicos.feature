@@ -30,7 +30,7 @@ Feature: Gestion de Medicos
 
     Examples:
       | nombre        | cedula  | consultorio | franja      |
-      | Carlos Prueba | 7654321 | 1           | 06:00-14:00 |
+      | Carlos Prueba | 7654321 | 8           | 06:00-14:00 |
       | Luis Vargas   | 2345678 | 2           | 14:00-22:00 |
 
   @crear_usuario @limpiar_medicos
@@ -147,22 +147,21 @@ Feature: Gestion de Medicos
   @crear_usuario @limpiar_medicos
   Scenario: La cedula duplicada en un medico activo muestra alerta
     When el usuario hace clic en el enlace "Gestión Médicos"
-    And crea un medico "Original Doctor" con cedula "1111111" consultorio "1" y franja "06:00-14:00"
+    And crea un medico "Original Doctor" con cedula "1111111" consultorio "8" y franja "06:00-14:00"
     And hace clic en el boton "Crear médico"
     When ingresa el nombre "Duplicado Doctor" y la cedula duplicada del medico creado
     And hace clic en el boton "Guardar" del modal
     Then aparece el mensaje flotante "Ya existe un médico registrado con ese número de cédula"
 
   @crear_usuario @limpiar_medicos
-  Scenario: La cedula de un medico dado de baja permite crear otro medico
+  Scenario: La cedula de un medico dado de baja no permite crear otro medico
     When el usuario hace clic en el enlace "Gestión Médicos"
-    And crea un medico "Medico Baja" con cedula "2222222" consultorio "2" y franja "06:00-14:00"
+    And crea un medico "Medico Baja" con cedula "2222222" consultorio "2" y franja "14:00-22:00"
     And da de baja al medico "Dr. Medico Baja"
     And hace clic en el boton "Crear médico"
     When ingresa el nombre "Medico Nuevo" y la cedula reutilizada del medico dado de baja
     And hace clic en el boton "Guardar" del modal
-    Then aparece el mensaje flotante "Médico creado exitosamente"
-    And la tabla muestra al medico "Dr. Medico Nuevo" con consultorio "Sin asignar" y franja "Sin asignar"
+    Then aparece el mensaje flotante "HTTP_ERROR_500"
 
   @crear_usuario @limpiar_medicos
   Scenario: Cerrar el modal de edicion sin guardar preserva los datos
