@@ -2,6 +2,7 @@ package com.turnos.automation.pages;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -74,5 +75,9 @@ public class DoctorEditModalComponent extends PageObject {
 
     public void clickOutsideModal() {
         modalBackdrop.click();
+    }
+
+    public void pressEscape() {
+        modalBackdrop.sendKeys(Keys.ESCAPE);
     }
 }

@@ -24,8 +24,11 @@ public class DoctorsManagementStepDefinitions {
     private ConfirmDeleteModalComponent deleteModal;
     private ToastComponent toastComponent;
 
+    private String lastCreatedCedula;
+
     private String uniqueCedula(String base) {
-        return String.valueOf(System.currentTimeMillis() % 10000000L);
+        lastCreatedCedula = String.valueOf(System.currentTimeMillis() % 10000000L);
+        return lastCreatedCedula;
     }
 
     @Then("la barra de navegacion muestra el enlace {string}")
@@ -257,5 +260,38 @@ public class DoctorsManagementStepDefinitions {
         assertThat(doctorsPage.isDoctorInTable(doctorName))
                 .as("El medico '" + doctorName + "' debe aparecer en la tabla")
                 .isTrue();
+    }
+
+    @And("el usuario toca el campo cedula y sale sin escribir")
+    public void touchCedulaFieldAndLeave() {
+        createModal.waitForModal();
+        createModal.touchCedulaFieldAndLeave();
+    }
+
+    @When("ingresa el nombre {string} y la cedula duplicada del medico creado")
+    public void enterNameAndDuplicateCedula(String name) {
+        createModal.waitForModal();
+        createModal.enterName(name);
+        createModal.enterCedula(lastCreatedCedula);
+    }
+
+    @And("da de baja al medico {string}")
+    public void deactivateDoctor(String doctorDisplayName) {
+        doctorsPage.clickDeleteDoctor(doctorDisplayName);
+        deleteModal.waitForModal();
+        deleteModal.clickConfirm();
+        doctorsPage.waitForDoctorNotInTable(doctorDisplayName);
+    }
+
+    @When("ingresa el nombre {string} y la cedula reutilizada del medico dado de baja")
+    public void enterNameAndReusedCedula(String name) {
+        createModal.waitForModal();
+        createModal.enterName(name);
+        createModal.enterCedula(lastCreatedCedula);
+    }
+
+    @When("el usuario presiona la tecla Escape en el modal de edicion")
+    public void pressEscapeOnEditModal() {
+        editModal.pressEscape();
     }
 }

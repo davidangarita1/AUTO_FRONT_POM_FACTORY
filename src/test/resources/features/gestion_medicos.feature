@@ -125,3 +125,58 @@ Feature: Gestion de Medicos
     Then aparece el modal de confirmacion con el mensaje del medico "Sofia Torres"
     When el usuario hace clic en el boton "Cancelar" del modal de confirmacion
     Then el medico "Dr. Sofia Torres" aparece en la tabla
+
+  @crear_usuario
+  Scenario: Cerrar el modal de creacion sin guardar no agrega medicos
+    When el usuario hace clic en el enlace "Gestión Médicos"
+    And hace clic en el boton "Crear médico"
+    Then se abre el modal de creacion con los campos esperados
+    When ingresa el nombre "Temporal" y la cedula "9999999"
+    And hace clic en el boton "Cerrar" del modal
+    Then el medico "Dr. Temporal" no aparece en la tabla
+
+  @crear_usuario
+  Scenario: La cedula vacia impide guardar
+    When el usuario hace clic en el enlace "Gestión Médicos"
+    And hace clic en el boton "Crear médico"
+    When el usuario escribe "Juan Garcia" en el campo nombre
+    And el usuario toca el campo cedula y sale sin escribir
+    Then aparece el mensaje de validacion "El número de cédula es obligatorio"
+    And el boton "Guardar" del modal esta deshabilitado
+
+  @crear_usuario @limpiar_medicos
+  Scenario: La cedula duplicada en un medico activo muestra alerta
+    When el usuario hace clic en el enlace "Gestión Médicos"
+    And crea un medico "Original Doctor" con cedula "1111111" consultorio "1" y franja "06:00-14:00"
+    And hace clic en el boton "Crear médico"
+    When ingresa el nombre "Duplicado Doctor" y la cedula duplicada del medico creado
+    And hace clic en el boton "Guardar" del modal
+    Then aparece el mensaje flotante "Ya existe un médico registrado con ese número de cédula"
+
+  @crear_usuario @limpiar_medicos
+  Scenario: La cedula de un medico dado de baja permite crear otro medico
+    When el usuario hace clic en el enlace "Gestión Médicos"
+    And crea un medico "Medico Baja" con cedula "2222222" consultorio "2" y franja "06:00-14:00"
+    And da de baja al medico "Dr. Medico Baja"
+    And hace clic en el boton "Crear médico"
+    When ingresa el nombre "Medico Nuevo" y la cedula reutilizada del medico dado de baja
+    And hace clic en el boton "Guardar" del modal
+    Then aparece el mensaje flotante "Médico creado exitosamente"
+    And la tabla muestra al medico "Dr. Medico Nuevo" con consultorio "Sin asignar" y franja "Sin asignar"
+
+  @crear_usuario @limpiar_medicos
+  Scenario: Cerrar el modal de edicion sin guardar preserva los datos
+    When el usuario hace clic en el enlace "Gestión Médicos"
+    And crea un medico "Elena Rios" con cedula "4567890" consultorio "3" y franja "06:00-14:00"
+    And hace clic en el icono de editar del medico "Dr. Elena Rios"
+    Then se abre el modal de edicion con los datos del medico
+    When hace clic en el boton "Cerrar" del modal de edicion
+    Then la tabla muestra al medico "Dr. Elena Rios" con consultorio "3" y franja "06:00-14:00"
+
+  @crear_usuario @limpiar_medicos
+  Scenario: La tecla Escape no cierra el modal de edicion
+    When el usuario hace clic en el enlace "Gestión Médicos"
+    And crea un medico "Ricardo Mora" con cedula "5678901" consultorio "4" y franja "14:00-22:00"
+    And hace clic en el icono de editar del medico "Dr. Ricardo Mora"
+    When el usuario presiona la tecla Escape en el modal de edicion
+    Then el modal de edicion permanece abierto
